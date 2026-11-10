@@ -23,8 +23,8 @@ describe('cn', () => {
   });
 
   it('keeps text color and text size apart', () => {
-    expect(cn('text-sm text-text', 'text-text-muted')).toBe('text-sm text-text-muted');
-    expect(cn('text-sm text-text', 'text-lg')).toBe('text-text text-lg');
+    expect(cn('text-sm text-fg', 'text-fg-muted')).toBe('text-sm text-fg-muted');
+    expect(cn('text-sm text-fg', 'text-lg')).toBe('text-fg text-lg');
   });
 });
 

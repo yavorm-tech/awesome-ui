@@ -131,7 +131,7 @@ export function tailwindThemeCss(theme: TokenTheme): string {
 /** Base styles for the ThemeProvider wrapper element. */
 export const ROOT_CSS = `.aui-root {
   background-color: var(--color-surface);
-  color: var(--color-text);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: var(--text-base--line-height);

@@ -27,7 +27,7 @@ const demoCardStyles = tv({
   },
   variants: {
     tone: {
-      neutral: { root: 'border-border bg-surface-raised text-text', body: 'text-text-muted' },
+      neutral: { root: 'border-border bg-surface-raised text-fg', body: 'text-fg-muted' },
       primary: { root: 'border-primary-outline bg-primary-soft text-primary-on-soft' },
     },
   },

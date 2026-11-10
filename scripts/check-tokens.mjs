@@ -20,7 +20,7 @@ const RULES = [
   },
   {
     name: 'hard-coded color',
-    why: 'use a color token class (bg-primary-solid, text-text-muted, …)',
+    why: 'use a color token class (bg-primary-solid, text-fg-muted, …)',
     re: /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch)\(/g,
   },
   {

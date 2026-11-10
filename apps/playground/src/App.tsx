@@ -13,7 +13,7 @@ function ModeToggle() {
   return (
     <button
       type="button"
-      className="h-control-sm rounded-control border-border-strong px-control-px-sm border text-sm"
+      className="h-control-sm rounded-control border border-border-strong px-control-px-sm text-sm"
       onClick={() => {
         setMode(resolvedMode === 'dark' ? 'light' : 'dark');
       }}
@@ -32,7 +32,7 @@ export function App() {
         <div className="mb-6 flex items-center gap-3">
           <select
             aria-label="Theme"
-            className="h-control-sm rounded-control border-border-strong bg-surface-sunken border px-2 text-sm"
+            className="h-control-sm rounded-control border border-border-strong bg-surface-sunken px-2 text-sm"
             value={name}
             onChange={(e) => {
               setName(e.target.value as BuiltInThemeName);
@@ -44,7 +44,7 @@ export function App() {
           </select>
           <ModeToggle />
         </div>
-        <p className="text-text-muted mb-2">Packages resolved from their built output:</p>
+        <p className="mb-2 text-fg-muted">Packages resolved from their built output:</p>
         <ul className="list-disc ps-6">
           <li>@awesome-ui/tokens, @awesome-ui/core (theming)</li>
           {placeholders.map((p) => (

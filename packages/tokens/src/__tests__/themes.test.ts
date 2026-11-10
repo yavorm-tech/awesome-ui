@@ -32,11 +32,11 @@ describe.each(THEMES.map((t) => [t.name, t] as const))('%s theme', (_name, theme
     const c = tokens.colors;
 
     it.each([
-      ['text', 'surface'],
-      ['text', 'surfaceRaised'],
-      ['text', 'surfaceSunken'],
-      ['textMuted', 'surface'],
-      ['textMuted', 'surfaceRaised'],
+      ['fg', 'surface'],
+      ['fg', 'surfaceRaised'],
+      ['fg', 'surfaceSunken'],
+      ['fgMuted', 'surface'],
+      ['fgMuted', 'surfaceRaised'],
     ] as const)('%s on %s meets AA', (fg, bg) => {
       expect(contrastRatio(c[fg], c[bg])).toBeGreaterThanOrEqual(AA);
     });

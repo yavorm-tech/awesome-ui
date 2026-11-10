@@ -128,9 +128,9 @@ exports[`themeToCss > matches the snapshot 1`] = `
   --color-surface-sunken: #F8FAFC;
   --color-border: #E2E8F0;
   --color-border-strong: #CBD5E1;
-  --color-text: #0F172A;
-  --color-text-muted: #64748B;
-  --color-text-disabled: #94A3B8;
+  --color-fg: #0F172A;
+  --color-fg-muted: #64748B;
+  --color-fg-disabled: #94A3B8;
   --color-focus-ring: #6366F1;
   --color-backdrop: rgb(15 23 42 / 0.6);
   --color-primary-solid: #4F46E5;
@@ -188,9 +188,9 @@ exports[`themeToCss > matches the snapshot 1`] = `
   --color-surface-sunken: #1E293B;
   --color-border: #1E293B;
   --color-border-strong: #334155;
-  --color-text: #F1F5F9;
-  --color-text-muted: #94A3B8;
-  --color-text-disabled: #475569;
+  --color-fg: #F1F5F9;
+  --color-fg-muted: #94A3B8;
+  --color-fg-disabled: #475569;
   --color-focus-ring: #818CF8;
   --color-backdrop: rgb(2 6 23 / 0.7);
   --color-primary-solid: #4F46E5;
@@ -249,9 +249,9 @@ exports[`themeToCss > matches the snapshot 1`] = `
     --color-surface-sunken: #1E293B;
     --color-border: #1E293B;
     --color-border-strong: #334155;
-    --color-text: #F1F5F9;
-    --color-text-muted: #94A3B8;
-    --color-text-disabled: #475569;
+    --color-fg: #F1F5F9;
+    --color-fg-muted: #94A3B8;
+    --color-fg-disabled: #475569;
     --color-focus-ring: #818CF8;
     --color-backdrop: rgb(2 6 23 / 0.7);
     --color-primary-solid: #4F46E5;

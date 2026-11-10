@@ -21,7 +21,7 @@ declare module '../overrides/types' {
 const testBoxStyles = tv({
   slots: {
     root: 'rounded-control bg-surface p-4',
-    label: 'text-sm text-text',
+    label: 'text-sm text-fg',
   },
   variants: {
     tone: {

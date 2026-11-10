@@ -37,9 +37,9 @@ export const SEMANTIC_COLORS = [
   'surfaceSunken',
   'border',
   'borderStrong',
-  'text',
-  'textMuted',
-  'textDisabled',
+  'fg',
+  'fgMuted',
+  'fgDisabled',
   'focusRing',
   'backdrop',
 ] as const;

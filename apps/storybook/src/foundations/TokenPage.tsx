@@ -28,7 +28,7 @@ const ROLE_KEYS: (keyof IntentRoles)[] = [
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="border-border text-text mb-4 border-b pb-2 text-xl font-semibold">{title}</h2>
+      <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-fg">{title}</h2>
       {children}
     </section>
   );
@@ -38,13 +38,13 @@ function Swatch({ variable, label, value }: { variable: string; label: string; v
   return (
     <figure className="m-0 min-w-0">
       <div
-        className="border-border h-12 rounded-sm border"
+        className="h-12 rounded-sm border border-border"
         style={{ background: `var(${variable})` }}
         title={variable}
       />
-      <figcaption className="text-text mt-1 text-xs">
+      <figcaption className="mt-1 text-xs text-fg">
         <span className="block truncate font-medium">{label}</span>
-        <code className="text-text-muted block truncate font-mono">{value}</code>
+        <code className="block truncate font-mono text-fg-muted">{value}</code>
       </figcaption>
     </figure>
   );
@@ -57,10 +57,10 @@ export function TokenPage() {
   const mode = theme.tokens[resolvedMode];
 
   return (
-    <div className="text-text mx-auto max-w-6xl p-6">
+    <div className="mx-auto max-w-6xl p-6 text-fg">
       <header className="mb-8">
         <h1 className="text-3xl font-bold">Theme tokens</h1>
-        <p className="text-text-muted">
+        <p className="text-fg-muted">
           Theme <code className="font-mono">{theme.name}</code>, {resolvedMode} mode. Switch with
           the toolbar. Every swatch is painted from its CSS variable, so it shows exactly what
           components get.
@@ -115,7 +115,7 @@ export function TokenPage() {
                   On soft
                 </span>
                 <span
-                  className="rounded-control px-control-px-sm border py-1"
+                  className="rounded-control border px-control-px-sm py-1"
                   style={{
                     borderColor: `var(${cssVar.role(intent, 'outline')})`,
                     color: `var(${cssVar.role(intent, 'onSoft')})`,
@@ -154,22 +154,22 @@ export function TokenPage() {
           {RADII.map((r) => (
             <div key={r} className="text-center text-xs">
               <div
-                className="border-primary-outline bg-primary-soft mb-1 size-20 border-2"
+                className="mb-1 size-20 border-2 border-primary-outline bg-primary-soft"
                 style={{ borderRadius: `var(${cssVar.radius(r)})` }}
               />
               <div className="font-medium">{r}</div>
-              <code className="text-text-muted font-mono">{shared.radii[r]}</code>
+              <code className="font-mono text-fg-muted">{shared.radii[r]}</code>
             </div>
           ))}
         </div>
       </Section>
 
       <Section title="Shadow (swap per mode)">
-        <div className="bg-surface-sunken flex flex-wrap gap-8 p-6">
+        <div className="flex flex-wrap gap-8 bg-surface-sunken p-6">
           {SHADOWS.map((s) => (
             <div
               key={s}
-              className="rounded-card bg-surface-raised flex size-28 items-center justify-center text-sm"
+              className="flex size-28 items-center justify-center rounded-card bg-surface-raised text-sm"
               style={{ boxShadow: `var(${cssVar.shadow(s)})` }}
             >
               {s}
@@ -179,13 +179,13 @@ export function TokenPage() {
       </Section>
 
       <Section title="Typography">
-        <p className="text-text-muted mb-4 text-sm">
+        <p className="mb-4 text-sm text-fg-muted">
           sans: <code className="font-mono">{shared.fonts.sans}</code>
         </p>
         <div className="space-y-2">
           {TEXT_SIZES.map((size) => (
             <div key={size} className="grid grid-cols-[8rem_1fr] items-baseline gap-4">
-              <code className="text-text-muted font-mono text-xs">
+              <code className="font-mono text-xs text-fg-muted">
                 {size} · {shared.text[size].size}/{shared.text[size].lineHeight}
               </code>
               <span
@@ -213,12 +213,12 @@ export function TokenPage() {
         <div className="space-y-3">
           {CONTROL_SIZES.map((size) => (
             <div key={size} className="flex items-center gap-4">
-              <code className="text-text-muted w-48 font-mono text-xs">
+              <code className="w-48 font-mono text-xs text-fg-muted">
                 control-{size}: {shared.density.controlHeight[size]} · px{' '}
                 {shared.density.controlPaddingX[size]}
               </code>
               <div
-                className="rounded-control border-border-strong bg-surface-sunken flex items-center border text-sm"
+                className="flex items-center rounded-control border border-border-strong bg-surface-sunken text-sm"
                 style={{
                   height: `var(${cssVar.controlHeight(size)})`,
                   paddingInline: `var(${cssVar.controlPaddingX(size)})`,
@@ -228,7 +228,7 @@ export function TokenPage() {
               </div>
             </div>
           ))}
-          <code className="text-text-muted block font-mono text-xs">
+          <code className="block font-mono text-xs text-fg-muted">
             card padding: {shared.density.cardPadding} · spacing base: {shared.spacing}
           </code>
         </div>

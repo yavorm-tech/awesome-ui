@@ -19,7 +19,7 @@ export const Tokens: Story = {};
 /** The same markup in all three themes, light and dark (nested ThemeProviders). */
 export const Compare: Story = {
   render: () => (
-    <div className="bg-border grid gap-px lg:grid-cols-3">
+    <div className="grid gap-px bg-border lg:grid-cols-3">
       {(Object.keys(builtInThemes) as BuiltInThemeName[]).flatMap((name) =>
         (['light', 'dark'] as const).map((mode) => (
           <ThemeProvider
@@ -29,7 +29,7 @@ export const Compare: Story = {
             className="p-6"
           >
             <p
-              className="text-text-muted mb-3 font-mono text-xs"
+              className="mb-3 font-mono text-xs text-fg-muted"
               data-testid={`label-${name}-${mode}`}
             >
               {name} · {mode}
