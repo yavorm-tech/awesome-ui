@@ -1,60 +1,27 @@
+import {
+  type BuiltInThemeName,
+  builtInThemes,
+  type ThemeMode,
+  ThemeProvider,
+} from '@awesome-ui/core';
 import type { Decorator } from '@storybook/react-vite';
-import { type ReactNode, useEffect, useState } from 'react';
 
-export const THEMES = ['flowbite', 'slate-pro', 'soft'] as const;
-export type ThemeName = (typeof THEMES)[number];
+export const THEME_NAMES = Object.keys(builtInThemes) as BuiltInThemeName[];
+export const MODES: ThemeMode[] = ['light', 'dark', 'system'];
 
-export const MODES = ['light', 'dark', 'system'] as const;
-export type Mode = (typeof MODES)[number];
+/** Wraps every story in the real ThemeProvider, driven by the Theme / Mode toolbar. */
+export const withTheme: Decorator = (Story, context) => {
+  const name = (context.globals.theme as BuiltInThemeName | undefined) ?? 'flowbite';
+  const mode = (context.globals.mode as ThemeMode | undefined) ?? 'light';
+  const fullscreen = context.parameters.layout === 'fullscreen';
 
-function useResolvedMode(mode: Mode): 'light' | 'dark' {
-  const query = '(prefers-color-scheme: dark)';
-  const [systemDark, setSystemDark] = useState(() => window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const onChange = (event: MediaQueryListEvent) => {
-      setSystemDark(event.matches);
-    };
-    media.addEventListener('change', onChange);
-    return () => {
-      media.removeEventListener('change', onChange);
-    };
-  }, []);
-
-  if (mode === 'system') return systemDark ? 'dark' : 'light';
-  return mode;
-}
-
-interface ThemeFrameProps {
-  theme: ThemeName;
-  mode: Mode;
-  children: ReactNode;
-}
-
-/**
- * Phase 0 placeholder: writes `data-theme` / `data-mode` onto a wrapper.
- * Phase 1 replaces this with the real `<ThemeProvider>`; the toolbar stays the same.
- */
-function ThemeFrame({ theme, mode, children }: ThemeFrameProps) {
-  const resolvedMode = useResolvedMode(mode);
   return (
-    <div
-      data-theme={theme}
-      data-mode={resolvedMode}
-      data-testid="theme-root"
-      style={{ padding: '1rem' }}
+    <ThemeProvider
+      theme={builtInThemes[name]}
+      mode={mode}
+      className={fullscreen ? 'min-h-screen' : 'min-h-screen p-4'}
     >
-      {children}
-    </div>
+      <Story />
+    </ThemeProvider>
   );
-}
-
-export const withTheme: Decorator = (Story, context) => (
-  <ThemeFrame
-    theme={(context.globals.theme as ThemeName | undefined) ?? 'flowbite'}
-    mode={(context.globals.mode as Mode | undefined) ?? 'light'}
-  >
-    <Story />
-  </ThemeFrame>
-);
+};

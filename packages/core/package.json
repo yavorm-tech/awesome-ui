@@ -41,9 +41,14 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@awesome-ui/tokens": "workspace:^"
+    "@awesome-ui/tokens": "workspace:^",
+    "tailwind-variants": "4.0.2"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   }
 }

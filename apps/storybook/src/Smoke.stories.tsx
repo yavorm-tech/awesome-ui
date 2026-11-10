@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-/** Pipeline check for Tailwind, the theme decorator and the a11y addon. Removed in Phase 2. */
+/** Pipeline check for Tailwind, tokens, the theme decorator and the a11y addon. Removed in Phase 2. */
 function SmokeCard() {
   return (
-    <section className="max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Tooling smoke test</h2>
-      <p className="text-gray-700 dark:text-gray-300">
-        If this card is styled, Tailwind v4 is wired up. Кирилица също работи.
+    <section className="rounded-card border-border bg-surface-raised p-card-p max-w-sm border shadow-md">
+      <h2 className="text-text mb-2 text-xl font-bold">Tooling smoke test</h2>
+      <p className="text-text-muted">
+        If this card is styled, Tailwind v4 and the tokens are wired up. Кирилицата също работи.
       </p>
     </section>
   );
@@ -15,6 +15,7 @@ function SmokeCard() {
 const meta = {
   title: 'Internal/Smoke',
   component: SmokeCard,
+  parameters: { layout: 'padded' },
 } satisfies Meta<typeof SmokeCard>;
 
 export default meta;

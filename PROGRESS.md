@@ -34,6 +34,18 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 - ✅ Changesets
 - ✅ CLAUDE.md, PROJECT_PROMPT.md, playground app
 
+## Phase 1 checklist
+
+- ✅ Token schema (palettes, semantic colors, intent roles, radius, typography, shadow, density, motion, z-index)
+- ✅ Themes `flowbite`, `slate-pro`, `soft`, light + dark, WCAG AA text contrast tested
+- ✅ Opt-in self-hosted fonts with Cyrillic (`@awesome-ui/tokens/fonts/*.css`)
+- ✅ Generated `theme.css` (Tailwind `@theme`) and `themes.css` (static scoped themes)
+- ✅ `ThemeProvider` (nested, light/dark/system, controlled/uncontrolled, style injection), `createTheme`, `useTheme`
+- ✅ Override system: `ComponentOverrideMap`, `useComponentProps`, `useSlotClasses`, token-aware `tv` / `cn`
+- ✅ `scripts/check-tokens.mjs` enforcement in `pnpm lint`
+- ✅ Storybook: real ThemeProvider decorator, Foundations/Theme tokens (+ Compare), Foundations/Overrides
+- ✅ Tests: 158 unit, 12 e2e
+
 ## Components — Definition of Done
 
 Columns: **API** typed/ref/controlled · **Slots** documented + overrides · **Stories** incl. Themes · **Tests** unit · **a11y** axe + keyboard check · **CI** lint/type/test · **Docs**

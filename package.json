@@ -9,7 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint lint:package && eslint '*.{ts,js}' test 'packages/*.ts' --max-warnings 0",
+    "lint": "turbo run lint lint:package && eslint '*.{ts,js}' test 'packages/*.ts' scripts --max-warnings 0 && node scripts/check-tokens.mjs",
     "typecheck": "turbo run typecheck && tsc -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",

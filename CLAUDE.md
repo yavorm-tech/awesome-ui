@@ -23,7 +23,7 @@ Full brief: `PROJECT_PROMPT.md`. Status: `PROGRESS.md`.
 | Command                        | What                                                                             |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `pnpm build`                   | tsup builds of all packages (ESM + CJS + d.ts) via Turborepo                     |
-| `pnpm lint`                    | ESLint (zero warnings) + publint + arethetypeswrong per package                  |
+| `pnpm lint`                    | ESLint (zero warnings) + publint + arethetypeswrong + `scripts/check-tokens.mjs` |
 | `pnpm typecheck`               | `tsc --noEmit` in every workspace + root config files                            |
 | `pnpm test`                    | Vitest (jsdom, Testing Library, vitest-axe) for `packages/*/src/**/*.test.ts(x)` |
 | `pnpm storybook`               | Storybook dev server on :6006                                                    |
@@ -56,6 +56,18 @@ Full brief: `PROJECT_PROMPT.md`. Status: `PROGRESS.md`.
 - TypeScript `strict` (+ `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`); no `any` in public APIs.
 - Public API changes require a Changeset.
 
+## Theming & token rules
+
+- Source of truth: `packages/tokens/src/themes/*.ts` (values) and `types.ts` (schema). `dist/theme.css` (Tailwind `@theme`) and `dist/themes.css` are generated from them by `scripts/build-css.mjs`; never edit generated CSS.
+- Runtime CSS variables use Tailwind v4's own names, so token utilities just work: `bg-primary-600`, `bg-primary-solid hover:bg-primary-solid-hover text-primary-on-solid`, `bg-surface`, `text-text-muted`, `border-border`, `ring-focus-ring`, `rounded-control`, `shadow-overlay`, `h-control-md px-control-px-md`, `p-card-p`, `ease-standard duration-(--duration-fast)`, `z-(--z-modal)`.
+- Prefer **intent roles** (`{intent}-solid/-solid-hover/-on-solid/-soft/-on-soft/-outline`) and **semantic colors** over raw palette steps; they swap per mode.
+- **Never use Tailwind's `dark:` variant in library code.** Light/dark differences are tokens. Nested providers rely on this.
+- `scripts/check-tokens.mjs` (part of `pnpm lint`) rejects in `packages/*/src` (except tokens, tests, stories): `dark:`, hex/rgb/hsl colors, Tailwind default palette classes (`bg-blue-600`, `text-white`), bracketed lengths (`w-[13px]`). Escape hatch: a `check-tokens-ignore` comment on the line, with a reason.
+- New token → add it to `types.ts`, all 3 themes (light + dark where per-mode), `css.ts` (`cssVar` + variables), `twMergeConfig` in `packages/core/src/utils/tv.ts` if it creates a new utility value, and the Theme tokens story.
+- Theme-level component overrides: register the component in `ComponentOverrideMap` (declaration merging) and use `useComponentProps(name, props)` + `useSlotClasses(name, recipe(variants), variantProps, { className, slotClassNames })`. Precedence: recipe → theme slots → theme variants → `slotClassNames` → `className`.
+- Use `tv` and `cn` from `@awesome-ui/core` (configured with the token-aware merge rules), never `tailwind-variants` directly.
+- All WCAG AA text contrast pairs are tested in `packages/tokens/src/__tests__/themes.test.ts`; adjust token values, not tests.
+
 ## Definition of done (every component)
 
 1. Typed API, ref forwarding, controlled + uncontrolled where stateful.
@@ -70,4 +82,5 @@ Full brief: `PROJECT_PROMPT.md`. Status: `PROGRESS.md`.
 
 - Vitest 5 changed `Assertion<T>` to `Assertion<R, T>`; jest-dom/vitest-axe matcher types are declared in `test/matchers.d.ts` instead of their upstream augmentations.
 - TypeScript is pinned to 6.0.x (typescript-eslint does not support TS 7 yet). ESLint is pinned to 9.x (eslint-plugin-react / jsx-a11y do not support ESLint 10 yet).
-- Storybook dark mode uses `@custom-variant dark` on `[data-mode='dark']`.
+- `tailwind-variants` v4 bundles its own tailwind-merge engine, so `tailwind-merge` is not a separate dependency.
+- Consumers must `@source` the built `@awesome-ui` packages in their Tailwind CSS (see `apps/playground/src/index.css`).

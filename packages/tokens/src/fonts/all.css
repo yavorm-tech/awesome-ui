@@ -1,0 +1,4 @@
+/* Fonts for all three built-in themes. */
+@import './flowbite.css';
+@import './slate-pro.css';
+@import './soft.css';

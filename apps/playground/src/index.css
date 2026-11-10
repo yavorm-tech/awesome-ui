@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+@import '@awesome-ui/tokens/theme.css';
+@import '@awesome-ui/tokens/fonts/all.css';
+
+/* Let Tailwind see the class names used inside the built library packages. */
+@source '../node_modules/@awesome-ui';
