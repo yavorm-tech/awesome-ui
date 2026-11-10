@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+/* Scan library sources for class names. Tokens/theme CSS is added in Phase 1. */
+@source '../../../packages/*/src';
+@source '../src';
+
+/* Dark mode is driven by the theme decorator (data-mode attribute), not the OS. */
+@custom-variant dark (&:where([data-mode='dark'], [data-mode='dark'] *));

@@ -1,0 +1,30 @@
+{
+  "name": "@awesome-ui/playground",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@awesome-ui/charts": "workspace:^",
+    "@awesome-ui/core": "workspace:^",
+    "@awesome-ui/data-grid": "workspace:^",
+    "@awesome-ui/date-pickers": "workspace:^",
+    "@awesome-ui/forms": "workspace:^",
+    "@awesome-ui/react": "workspace:^",
+    "@awesome-ui/tokens": "workspace:^",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.5",
+    "@vitejs/plugin-react": "^6.3.0",
+    "tailwindcss": "4.3.5",
+    "vite": "8.3.6"
+  }
+}
