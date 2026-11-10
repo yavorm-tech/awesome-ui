@@ -6,9 +6,9 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 
 | #   | Phase                                           | Status               |
 | --- | ----------------------------------------------- | -------------------- |
-| 0   | Foundation                                      | 🟡 awaiting approval |
-| 1   | Tokens & theming                                | ⬜                   |
-| 2   | Reference components (Button, Input, TextInput) | ⬜                   |
+| 0   | Foundation                                      | ✅ approved          |
+| 1   | Tokens & theming                                | ✅ approved          |
+| 2   | Reference components (Button, Input, TextInput) | 🟡 awaiting approval |
 | 3   | Layout                                          | ⬜                   |
 | 4   | Basic inputs                                    | ⬜                   |
 | 5   | Complex inputs                                  | ⬜                   |
@@ -45,6 +45,18 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 - ✅ `scripts/check-tokens.mjs` enforcement in `pnpm lint`
 - ✅ Storybook: real ThemeProvider decorator, Foundations/Theme tokens (+ Compare), Foundations/Overrides
 - ✅ Tests: 158 unit, 12 e2e
+- ✅ Decision: `soft` keeps pill-shaped Buttons (theme-level `Button.slots.root = 'rounded-pill'`)
+
+## Phase 2 checklist
+
+- ✅ Core utilities: `Slot` (asChild), `mergeProps`, `mergeRefs` / `useMergedRefs`, `PolymorphicProps` / `PolymorphicComponent`, `useControllableState`, `dataAttr`
+- ✅ Button: 4 variants × 7 colors × 3 sizes, loading (start/end/center, focusable), icons, fullWidth, `as` + `asChild`, disabled links
+- ✅ Input: bare field, adornments, clearable (controlled + uncontrolled, fires onChange), sizes, invalid/disabled/read-only, form reset sync
+- ✅ TextInput: label, helper, error (live region, aria-errormessage), required marker, counter, label-required types
+- ✅ Storybook: stories + MDX docs per component, `themeMatrix` and `padded` story parameters
+- ✅ Tests: 58 component unit tests + 14 core utility tests (228 unit total); e2e axe on every component story, keyboard checks, soft pill radius (50 e2e total)
+- ✅ Fixed: Storybook `@source` glob matched nothing (component classes were missing)
+- ✅ Playground: sign-up form built from the three components (built packages)
 
 ## Components — Definition of Done
 
@@ -52,9 +64,9 @@ Columns: **API** typed/ref/controlled · **Slots** documented + overrides · **S
 
 | Component                                         | Phase | API | Slots | Stories | Tests | a11y | CI  | Docs |
 | ------------------------------------------------- | ----- | --- | ----- | ------- | ----- | ---- | --- | ---- |
-| Button                                            | 2     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |
-| Input                                             | 2     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |
-| TextInput                                         | 2     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |
+| Button                                            | 2     | ✅  | ✅    | ✅      | ✅    | ✅   | ✅  | ✅   |
+| Input                                             | 2     | ✅  | ✅    | ✅      | ✅    | ✅   | ✅  | ✅   |
+| TextInput                                         | 2     | ✅  | ✅    | ✅      | ✅    | ✅   | ✅  | ✅   |
 | Box                                               | 3     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |
 | Container                                         | 3     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |
 | Grid                                              | 3     | ⬜  | ⬜    | ⬜      | ⬜    | ⬜   | ⬜  | ⬜   |

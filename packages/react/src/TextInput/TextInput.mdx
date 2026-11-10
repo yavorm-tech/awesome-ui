@@ -1,0 +1,65 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as TextInputStories from './TextInput.stories';
+
+<Meta of={TextInputStories} />
+
+# TextInput
+
+A complete text field: [Input](?path=/docs/inputs-input--docs) plus a label, helper text, error message, required marker and character counter, all wired up for assistive technology.
+
+<Canvas of={TextInputStories.Controlled} />
+
+## Usage
+
+```tsx
+import { TextInput } from '@awesome-ui/react';
+
+<TextInput
+  label="Email"
+  type="email"
+  required
+  helperText="We never share it."
+  errorMessage={errors.email}
+  value={email}
+  onChange={(event) => setEmail(event.target.value)}
+/>;
+```
+
+- Takes every [Input](?path=/docs/inputs-input--docs) prop: `size`, adornments, `clearable`, `type`, and controlled or uncontrolled value.
+- `ref` and native attributes go to the `<input>`. `className` goes to the TextInput root.
+- `invalid` defaults to `Boolean(errorMessage)`. While invalid, the error message replaces the helper text.
+- `showCount` shows `count/maxLength` (or just the count). It turns to the danger color at the limit, and the native `maxLength` enforces the limit.
+- The types require a `label` or an `aria-label` / `aria-labelledby`.
+
+## Props
+
+<ArgTypes of={TextInputStories} />
+
+## Slots
+
+| Slot             | Element                            |
+| ---------------- | ---------------------------------- |
+| `root`           | wrapper `<div>`, gets `className`  |
+| `label`          | `<label>`                          |
+| `requiredMarker` | the `*` after the label            |
+| `field`          | the inner Input's root box         |
+| `input`          | the native `<input>`               |
+| `footer`         | row under the field                |
+| `helperText`     | helper `<p>`                       |
+| `errorMessage`   | error `<p>` (a polite live region) |
+| `counter`        | character counter `<p>`            |
+
+The inner field also uses the theme's `components.Input` overrides, so theming Input themes every TextInput.
+
+## Accessibility
+
+- The `<label>` is associated with the input through `htmlFor` / `id`. The `id` comes from `useId()` unless you pass one.
+- `aria-describedby` lists, in order, the error or helper text, the counter, and any `aria-describedby` you pass.
+- **Invalid:** sets `aria-invalid="true"` and `aria-errormessage` pointing at the message. The message element stays mounted as an `aria-live="polite"` region, so it is announced once when it appears and doesn't interrupt typing.
+- **Required:** sets the native `required` attribute, which screen readers announce. The visual `*` is `aria-hidden`.
+- **Counter:** not a live region, so it isn't announced on every keystroke. It is part of the description, so it is read when the field gets focus.
+
+## Themes
+
+<Canvas of={TextInputStories.Themes} />

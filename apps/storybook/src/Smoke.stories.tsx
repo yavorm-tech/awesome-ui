@@ -15,7 +15,7 @@ function SmokeCard() {
 const meta = {
   title: 'Internal/Smoke',
   component: SmokeCard,
-  parameters: { layout: 'padded' },
+  parameters: { padded: true },
 } satisfies Meta<typeof SmokeCard>;
 
 export default meta;

@@ -2,6 +2,7 @@
 @import '@awesome-ui/tokens/theme.css';
 @import '@awesome-ui/tokens/fonts/all.css';
 
-/* Scan library and story sources for class names. */
-@source '../../../packages/*/src';
+/* Scan library and story sources for class names. Point at the packages directory itself:
+   a glob over the package folders matched nothing here. */
+@source '../../../packages';
 @source '../src';

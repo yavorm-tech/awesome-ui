@@ -1,24 +1,6 @@
-import AxeBuilder from '@axe-core/playwright';
-import { expect, type Page, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-/** Open a story in isolation (iframe), with optional toolbar globals. */
-async function openStory(page: Page, id: string, globals?: Record<string, string>) {
-  const g = globals
-    ? `&globals=${Object.entries(globals)
-        .map(([k, v]) => `${k}:${v}`)
-        .join(';')}`
-    : '';
-  await page.goto(`/iframe.html?id=${id}&viewMode=story${g}`);
-  await page.locator('#storybook-root').waitFor();
-  await page.evaluate(() => document.fonts.ready);
-}
-
-async function axeViolations(page: Page) {
-  const results = await new AxeBuilder({ page }).include('#storybook-root').analyze();
-  return results.violations.map(
-    (v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`,
-  );
-}
+import { axeViolations, openStory } from './helpers';
 
 test('smoke story renders with token styles and has no axe violations', async ({ page }) => {
   await openStory(page, 'internal-smoke--default');

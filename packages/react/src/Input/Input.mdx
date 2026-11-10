@@ -1,0 +1,51 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+The **bare** text field: the bordered box with optional adornments and a clear button. It has no label, helper text or error message. For a labelled form field use [TextInput](?path=/docs/inputs-textinput--docs).
+
+<Canvas of={InputStories.Adornments} />
+
+## Usage
+
+```tsx
+import { Input } from '@awesome-ui/react';
+
+<Input aria-label="Search" startAdornment={<SearchIcon />} clearable />
+<Input aria-labelledby="price-heading" type="number" endAdornment="EUR" />
+```
+
+- `ref` and every native attribute (`id`, `name`, `value`, `defaultValue`, `onChange`, `placeholder`, …) go to the `<input>`. `className` and `style` go to the root box.
+- Works **controlled** (`value` + `onChange`) and **uncontrolled** (`defaultValue`), exactly like a native input.
+- `size` is the density size (`sm | md | lg`). The native `size` attribute is available as `htmlSize`.
+- **`clearable`:** while the field has a value, a clear button appears. Clearing fires your `onChange` with an empty value, then `onClear`, and returns focus to the field. This works the same in controlled and uncontrolled mode.
+
+## Props
+
+<ArgTypes of={InputStories} />
+
+## Slots
+
+| Slot             | Element                                      |
+| ---------------- | -------------------------------------------- |
+| `root`           | the bordered box (`<div>`), gets `className` |
+| `input`          | the native `<input>`                         |
+| `startAdornment` | `<span>` before the input                    |
+| `endAdornment`   | `<span>` after the input                     |
+| `clearButton`    | the clear `<button>`                         |
+
+## Accessibility
+
+- **Give every Input an accessible name:** `aria-label`, `aria-labelledby`, or a `<label htmlFor>`. TextInput does this for you.
+- `invalid` sets `aria-invalid="true"`. Describe the error with `aria-describedby`; TextInput wires this up automatically.
+- The clear button is a real `<button>` in the tab order, named by `clearLabel` (default "Clear"; translate it).
+- Adornments are presentational. If they carry meaning (for example a currency), repeat it in the label or description.
+- Clicking padding or an adornment focuses the input. This is a pointer convenience only; keyboard users tab straight to the input.
+
+## Themes
+
+<Canvas of={InputStories.Themes} />

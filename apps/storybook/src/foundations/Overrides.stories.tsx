@@ -70,7 +70,7 @@ const themed = createTheme(flowbite, {
 
 const meta = {
   title: 'Foundations/Overrides',
-  parameters: { layout: 'padded' },
+  parameters: { padded: true },
 } satisfies Meta;
 
 export default meta;

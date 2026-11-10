@@ -1,0 +1,78 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Triggers an action. Renders a native `<button type="button">` by default.
+
+<Canvas of={ButtonStories.Variants} />
+
+## Usage
+
+```tsx
+import { Button } from '@awesome-ui/react';
+
+<Button onClick={save}>Save</Button>
+<Button variant="outline" color="danger" startIcon={<TrashIcon />}>Delete</Button>
+<Button loading loadingText="Saving…">Save</Button>
+
+// Render another element or component
+<Button as="a" href="/docs">Docs</Button>
+<Button asChild><RouterLink to="/settings">Settings</RouterLink></Button>
+```
+
+- **Variants:** `solid` (default), `outline`, `ghost`, `link`.
+- **Colors:** any intent, `primary` (default), `secondary`, `neutral`, `success`, `warning`, `danger` or `info`. Colors come from the intent role tokens, so they adapt to the theme and mode.
+- **Sizes:** `sm`, `md` (default), `lg`, from the theme's density tokens.
+- **`as` vs `asChild`:** `as` swaps the rendered element and type-checks its props. `asChild` merges Button's props, classes and ref into the child element you pass, which is the right choice for router links.
+
+## Props
+
+<ArgTypes of={ButtonStories} />
+
+## Slots
+
+Use these names in `slotClassNames` and in the theme's `components.Button.slots`.
+
+| Slot        | Element                                      |
+| ----------- | -------------------------------------------- |
+| `root`      | the button (or the `as` / `asChild` element) |
+| `label`     | `<span>` around the children                 |
+| `startIcon` | `<span aria-hidden>` around `startIcon`      |
+| `endIcon`   | `<span aria-hidden>` around `endIcon`        |
+| `spinner`   | the loading spinner `<svg>`                  |
+
+Theme-level example:
+
+```ts
+createTheme(flowbite, {
+  name: 'brand',
+  components: {
+    Button: {
+      defaultProps: { variant: 'outline' },
+      slots: { root: 'tracking-wide' },
+      variants: { size: { lg: { root: 'shadow-md' } } },
+    },
+  },
+});
+```
+
+The built-in `soft` theme uses this mechanism to make buttons pill-shaped (`slots.root: 'rounded-pill'`).
+
+## Accessibility
+
+- A native `<button>`: Enter and Space activate it; Tab focuses it. The focus ring (the `focus-ring` token) shows on keyboard focus only (`:focus-visible`).
+- **Disabled** native buttons get the `disabled` attribute and leave the tab order.
+- **Loading** buttons are _not_ disabled. They stay focusable, so keyboard focus is not lost, and get `aria-busy="true"` and `aria-disabled="true"`. Activation is blocked. With `loadingPosition="center"` the label is hidden visually but stays the accessible name.
+- **Icons** are decorative and hidden from assistive technology. The children must name the button. Icon-only buttons arrive with the Icon component; until then pass `aria-label`.
+- **`as` / `asChild`:**
+  - Links keep link semantics. When disabled they lose `href` and get `aria-disabled` and `tabindex="-1"`.
+  - Non-interactive elements (for example `as="div"`) get `role="button"`, `tabindex="0"`, and Enter and Space activation.
+- `type` defaults to `"button"`, so a Button inside a form never submits it unless you pass `type="submit"`.
+
+## Themes
+
+<Canvas of={ButtonStories.Themes} />
